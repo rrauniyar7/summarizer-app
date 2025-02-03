@@ -3,11 +3,16 @@ import openai
 import os
 from dotenv import load_dotenv
 
-# Load environment variables
+# Load environment variables from .env file (for local development)
 load_dotenv()
 
+# Read the OpenAI API key from environment variables
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
+if not OPENAI_API_KEY:
+    raise ValueError("OPENAI_API_KEY not found in environment variables")
+
 # Configure OpenAI API
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = OPENAI_API_KEY
 
 app = Flask(__name__)
 
